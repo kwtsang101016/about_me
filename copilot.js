@@ -1,20 +1,38 @@
 /**
- * copilot.js —— Q&A widget for pages/ask.html
- * States: live SSE → local mock → degrade with page links
+ * copilot.js — Ask widget for pages/ask.html
+ * Live SSE on Vercel → static hosts point to Vercel Ask (VPN) + light mock
  */
 
 (function () {
   'use strict';
 
+  var LIVE_ASK_URL = 'https://about-ka-wai-tsang.vercel.app/pages/ask.html';
   var API_BASE = window.__COPILOT_API__ || '';
   var TIMEOUT_MS = 45000;
 
+  function siteRoot() {
+    var path = location.pathname || '/';
+    var pagesAt = path.lastIndexOf('/pages/');
+    if (pagesAt >= 0) return path.slice(0, pagesAt + 1);
+    var slash = path.lastIndexOf('/');
+    return slash >= 0 ? path.slice(0, slash + 1) : '/';
+  }
+
+  var ROOT = siteRoot();
   var PAGES = {
-    home: '/index.html',
-    teaching: '/pages/teaching.html',
-    research: '/pages/research.html',
-    publications: '/pages/publications.html'
+    home: ROOT + 'index.html',
+    teaching: ROOT + 'pages/teaching.html',
+    research: ROOT + 'pages/research.html',
+    publications: ROOT + 'pages/publications.html'
   };
+
+  function isStaticHost() {
+    if (location.protocol === 'file:') return true;
+    var host = location.hostname || '';
+    if (/github\.io$/i.test(host)) return true;
+    if (host === 'localhost' || host === '127.0.0.1') return false;
+    return false;
+  }
 
   var widget = document.getElementById('askWidget');
   if (!widget) return;
@@ -56,13 +74,18 @@
            escapeHtml(text) + '</p>';
   }
 
+  function liveAskLink() {
+    return '<p class="ask__jd-evidence"><a class="ask__ref" href="' +
+      escapeHtml(LIVE_ASK_URL) + '" target="_blank" rel="noopener">Open live Ask on Vercel (VPN) ↗</a></p>';
+  }
+
   function degrade(reason) {
     var links =
       '<p class="ask__jd-evidence">' +
-      '<a class="ask__ref" href="/pages/teaching.html">Teaching ↗</a> · ' +
-      '<a class="ask__ref" href="/pages/research.html">Research ↗</a> · ' +
-      '<a class="ask__ref" href="/pages/publications.html">Publications ↗</a></p>';
-    showAnswer(banner(reason, true) + links);
+      '<a class="ask__ref" href="' + escapeHtml(PAGES.teaching) + '">Teaching ↗</a> · ' +
+      '<a class="ask__ref" href="' + escapeHtml(PAGES.research) + '">Research ↗</a> · ' +
+      '<a class="ask__ref" href="' + escapeHtml(PAGES.publications) + '">Publications ↗</a></p>';
+    showAnswer(banner(reason, true) + liveAskLink() + links);
     setStatus('');
   }
 
@@ -91,9 +114,7 @@
     if (res.status === 404) { clearTimeout(timer); throw { kind: 'nomock' }; }
     if (!res.ok) {
       clearTimeout(timer);
-      var info = {};
-      try { info = await res.json(); } catch (e) {}
-      throw { kind: res.status === 429 ? 'rate' : 'unavailable', info: info };
+      throw { kind: res.status === 429 ? 'rate' : 'unavailable' };
     }
 
     var reader = res.body.getReader();
@@ -147,13 +168,13 @@
         if (low.indexOf(MOCK[i].keys[j]) >= 0) return MOCK[i].text;
       }
     }
-    return 'This site doesn\'t cover that. Try the Teaching / Research / Publications pages, or start the local server with your API key set.';
+    return 'This static copy doesn\'t answer that live. Browse Teaching / Research / Publications, or open the Vercel Ask page with VPN.';
   }
 
-  function runMock(question) {
-    var note = 'Local fallback — canned answers (API not reachable). Start node server.mjs with your API key for live answers.';
+  function runStatic(question) {
+    var note = 'This is the GitHub Pages (static) copy — no AI API here. For live Ask, open VPN and use the Vercel link below.';
     var text = mockAnswer(question);
-    showAnswer(banner(note, true) + '<p>' + resolveRefs(escapeHtml(text)) + '</p>');
+    showAnswer(banner(note, true) + liveAskLink() + '<p>' + resolveRefs(escapeHtml(text)) + '</p>');
   }
 
   var ERRORS = {
@@ -176,11 +197,11 @@
     setStatus('Reading the site…');
 
     try {
-      if (location.protocol === 'file:') { runMock(text); }
+      if (isStaticHost()) { runStatic(text); }
       else { await runQa(text); }
     } catch (err) {
       var kind = (err && err.kind) || 'unavailable';
-      if (kind === 'nomock') runMock(text);
+      if (kind === 'nomock') runStatic(text);
       else degrade(ERRORS[kind] || ERRORS.unavailable);
     } finally {
       busy = false;

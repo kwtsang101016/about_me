@@ -1,12 +1,15 @@
 # Personal site ? Tsang Ka Wai
 
-Live:
-- Site: https://about-ka-wai-tsang.vercel.app
-- Repo: https://github.com/kwtsang101016/about_me
+## Two live URLs
 
-## Why Vercel (not GitHub Pages)
+| Version | URL | Best for |
+|--------|-----|----------|
+| **GitHub Pages (static, no API)** | https://kwtsang101016.github.io/about_me/ | Everyday browsing in mainland China |
+| **Vercel (Ask API)** | https://about-ka-wai-tsang.vercel.app | Live **Ask** ? may need VPN |
 
-GitHub Pages only hosts static files. The **Ask** feature needs a serverless API (`/api/ask`) plus `CLOD_API_KEY`, so this project is deployed on **Vercel**.
+Repo: https://github.com/kwtsang101016/about_me
+
+Workshop tip: share the GitHub Pages link for the site; tell students to open VPN only if they want to try live Ask on Vercel.
 
 ## Local preview
 
@@ -17,8 +20,8 @@ node scripts/local-server.mjs
 # open http://127.0.0.1:4173
 ```
 
-Or open `index.html` directly (Ask falls back to canned answers).
+Or open `index.html` directly (Ask uses canned answers).
 
 ## Vercel env
 
-In the Vercel project, set `CLOD_API_KEY` (Production / Preview). Optional: `CLOD_MODEL`, `CLOD_BASE_URL`.
+Set `CLOD_API_KEY` in the Vercel project (Production / Preview). Optional: `CLOD_MODEL`, `CLOD_BASE_URL`.
