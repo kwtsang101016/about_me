@@ -1,7 +1,7 @@
 # Personal site ? Tsang Ka Wai
 
 Live:
-- Site: https://about-me-tan-omega.vercel.app
+- Site: https://about-ka-wai-tsang.vercel.app
 - Repo: https://github.com/kwtsang101016/about_me
 
 ## Why Vercel (not GitHub Pages)
