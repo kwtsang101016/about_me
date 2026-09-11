@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask | Tsang Ka Wai</title>
+<meta name="description" content="Ask about Tsang Ka Wai's teaching, research, and trajectory. Answers are grounded in this site only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="curtain" id="curtain" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="nav__inner container">
+    <a class="nav__logo" href="../index.html">Tsang Ka Wai<span class="nav__logo-dot">.</span></a>
+    <button class="nav__burger" id="navBurger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__menu" id="navMenu" aria-label="Main navigation">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="../index.html#hero">Index</a></li>
+        <li><a class="nav__link" href="../index.html#journey">Trajectory</a></li>
+        <li><a class="nav__link" href="../index.html#strategy">Teaching</a></li>
+        <li><a class="nav__link" href="../index.html#projects">Work</a></li>
+        <li><a class="nav__link is-active" href="ask.html">Ask</a></li>
+        <li><a class="nav__link" href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+</header>
+<main>
+<div class="container">
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="../index.html">Index</a>
+    <span class="crumb__sep">/</span>
+    <span class="crumb__current">Ask</span>
+  </nav>
+</div>
+
+<section class="detail-hero">
+  <div class="container">
+    <p class="section__eyebrow">Ask</p>
+    <h1 class="detail-hero__title">Ask about my work</h1>
+    <p class="detail-hero__lead">Answers are grounded only in this site's profile (teaching, research, trajectory, publications).</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="ask" id="askWidget">
+      <form class="ask__form" id="askForm" novalidate>
+        <label class="ask__label" for="askInput" id="askLabel">Your question</label>
+        <textarea class="ask__input" id="askInput" name="question" rows="3" maxlength="2000"
+                  placeholder="e.g. What courses does he teach?"></textarea>
+        <div class="ask__actions">
+          <span class="ask__counter" id="askCounter" aria-hidden="true">0 / 2000</span>
+          <button type="submit" class="ask__submit" id="askSubmit">Ask</button>
+        </div>
+      </form>
+
+      <div class="ask__chips" id="askChips">
+        <span class="ask__chips-label">Try</span>
+        <button type="button" class="ask__chip">What is his current role?</button>
+        <button type="button" class="ask__chip">How does he use AI in teaching?</button>
+        <button type="button" class="ask__chip">Which courses does he teach?</button>
+      </div>
+
+      <p class="ask__status" id="askStatus" role="status"></p>
+      <div class="ask__answer" id="askAnswer" hidden></div>
+    </div>
+  </div>
+</section>
+</main>
+<script src="../vendor/gsap.min.js" defer></script>
+<script src="../vendor/ScrollTrigger.min.js" defer></script>
+<script src="../script.js" defer></script>
+<script src="../motion.js" defer></script>
+<script src="../copilot.js" defer></script>
+</body>
+</html>

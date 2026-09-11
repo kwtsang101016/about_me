@@ -1,0 +1,107 @@
+{
+  "person": {
+    "name": "Tsang Ka Wai",
+    "nameZh": "曾家炜",
+    "title": "Associate Professor (Teaching)",
+    "org": "School of Data Science, CUHK-Shenzhen",
+    "email": "kwtsang@cuhk.edu.cn",
+    "orcid": "https://orcid.org/0000-0002-9383-4455",
+    "office": "Rm 505b, Daoyuan Building, CUHKSZ",
+    "focus": "Teaching-track faculty; currently exploring how AI can enhance teaching and learning in statistics",
+    "interests": ["Statistics education", "AI for teaching and learning", "Time series", "High-dimensional regression", "Post-selection inference"],
+    "refs": [{ "page": "home", "anchor": "hero" }]
+  },
+  "trajectory": [
+    {
+      "id": "cuhk-math",
+      "period": "2004-2009",
+      "title": "CUHK Mathematics: 3 years undergraduate (BS, First Class Honours) + 2 years M.Phil under Prof. Jun Zou",
+      "refs": [{ "page": "home", "anchor": "journey" }]
+    },
+    {
+      "id": "stanford",
+      "period": "2009-2015",
+      "title": "Stanford Financial Mathematics MS; ICME PhD under Prof. Tze Leung Lai",
+      "refs": [{ "page": "home", "anchor": "journey" }]
+    },
+    {
+      "id": "sinica",
+      "period": "2015",
+      "title": "Academia Sinica postdoc (Institute of Statistical Science, Taipei); visiting instructor, Stanford Statistics",
+      "refs": [{ "page": "home", "anchor": "journey" }]
+    },
+    {
+      "id": "cuhksz",
+      "period": "2015-Present",
+      "title": "Joined CUHK-Shenzhen in Dec 2015; now Associate Professor (Teaching), School of Data Science; Program Coordinator for Statistics since 2015",
+      "refs": [{ "page": "home", "anchor": "journey" }]
+    }
+  ],
+  "teaching": {
+    "roles": [
+      "Program Coordinator, Statistics (2015-Present)",
+      "Director of Academic Advising, Statistics (2025-Present)",
+      "Chair, UG student organization committee, SDS (2024-Present)"
+    ],
+    "courses": [
+      "Time Series / Time Series Analysis / Advanced Time Series",
+      "Probability & Statistics I/II",
+      "Forecasting and Predictive Analytics",
+      "AI Exploration I",
+      "Survival Modelling",
+      "Statistical Capstone"
+    ],
+    "notes": [
+      "Actively studying how to use AI to enhance teaching and learning in statistics",
+      "Co-PI on AI-powered personalized learning (2025-2027)"
+    ],
+    "refs": [{ "page": "teaching", "anchor": "courses" }]
+  },
+  "research": {
+    "themes": ["post-selection inference", "time series", "high-dimensional regression", "AI for learning"],
+    "grants": [
+      {
+        "id": "nsfc",
+        "role": "Principal Investigator",
+        "title": "Post-selection estimators and valid inference for time-series models",
+        "period": "2021-2023",
+        "amount": "240K RMB",
+        "code": "NSFC 12001461",
+        "refs": [{ "page": "research", "anchor": "nsfc" }]
+      },
+      {
+        "id": "learning",
+        "role": "Co-Principal Investigator",
+        "title": "AI-powered personalized learning",
+        "period": "2025-2027",
+        "amount": "255K RMB",
+        "code": "1+1+1 Joint Collaboration Fund",
+        "refs": [{ "page": "research", "anchor": "learning" }]
+      }
+    ],
+    "refs": [{ "page": "research", "anchor": "why" }]
+  },
+  "publications": [
+    {
+      "id": "sinica-2021",
+      "cite": "Dai & Tsang (2021). Hybrid resampling confidence intervals... Statistica Sinica 31, 2239-2255.",
+      "role": "corresponding author",
+      "refs": [{ "page": "publications", "anchor": "sig" }]
+    },
+    {
+      "id": "physica-2023",
+      "cite": "Dai & Tsang (2023). Resampling CIs after model selection in linear time-series models. Physica A 611, 128443.",
+      "role": "corresponding author",
+      "refs": [{ "page": "publications", "anchor": "sig" }]
+    },
+    {
+      "id": "sim-2018",
+      "cite": "Lai, Lavori & Tsang (2018). Adaptive enrichment designs. Statistics in Medicine 38(4), 613-624.",
+      "refs": [{ "page": "publications", "anchor": "earlier" }]
+    }
+  ],
+  "boundaries": {
+    "refuseTopics": ["private student records", "unlisted personal data", "writing homework answers", "unrelated coding tasks", "medical/legal advice"],
+    "refs": [{ "page": "home", "anchor": "contact" }]
+  }
+}

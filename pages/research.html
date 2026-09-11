@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research | Tsang Ka Wai</title>
+<meta name="description" content="Research themes of Tsang Ka Wai — post-selection inference, time series, and AI-powered personalized learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="curtain" id="curtain" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="nav__inner container">
+    <a class="nav__logo" href="../index.html">Tsang Ka Wai<span class="nav__logo-dot">.</span></a>
+    <button class="nav__burger" id="navBurger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__menu" id="navMenu" aria-label="Main navigation">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="../index.html#hero">Index</a></li>
+        <li><a class="nav__link" href="../index.html#journey">Trajectory</a></li>
+        <li><a class="nav__link" href="../index.html#strategy">Teaching</a></li>
+        <li><a class="nav__link is-active" href="../index.html#projects">Work</a></li>
+        <li><a class="nav__link" href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+</header>
+<main>
+<div class="container">
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="../index.html">Index</a>
+    <span class="crumb__sep">/</span>
+    <a href="../index.html#projects">Work</a>
+    <span class="crumb__sep">/</span>
+    <span class="crumb__current">Research</span>
+  </nav>
+</div>
+
+<section class="detail-hero">
+  <div class="container">
+    <p class="section__eyebrow">Research</p>
+    <h1 class="detail-hero__title">Inference After the Model Has Already Been Chosen</h1>
+    <p class="detail-hero__lead">Research interests: time series, high-dimensional regression, and post-selection inference — especially when dependence and selection make classical statements fragile.</p>
+    <div class="detail-meta">
+      <div><span>Expertise</span><strong>STAT</strong></div>
+      <div><span>Themes</span><strong>Time series · HD regression · PSI</strong></div>
+      <div><span>Appointment</span><strong>Assoc. Prof. (Teaching), SDS</strong></div>
+      <div><span>ORCID</span><strong><a href="https://orcid.org/0000-0002-9383-4455">0000-0002-9383-4455</a></strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="detail-body">
+    <div>
+      <article class="detail-block" id="why">
+        <h2 class="detail-block__title"><span class="detail-block__num">01</span>Why post-selection inference</h2>
+        <p>In practice we rarely fix a model before looking at the data. Once selection has happened, intervals and p-values computed as if the model were given can be badly wrong. My work asks how to keep inferential claims honest under selection and temporal dependence.</p>
+      </article>
+
+      <article class="detail-block" id="nsfc">
+        <h2 class="detail-block__title"><span class="detail-block__num">02</span>NSFC project (PI)</h2>
+        <p><strong>Post-selection estimators and valid inference for time-series models</strong> · 2021–2023 · NSFC 12001461 · RMB 240K · completed.</p>
+        <p>The project focused on estimators and inferential procedures that remain meaningful after model selection in time-series settings — a bridge between methodological research and the claims we ask students to defend.</p>
+      </article>
+
+      <article class="detail-block" id="methods">
+        <h2 class="detail-block__title"><span class="detail-block__num">03</span>Method threads</h2>
+        <ul class="steps">
+          <li>Hybrid resampling confidence intervals for change-point or stationary high-dimensional stochastic regression (Statistica Sinica, 2021)</li>
+          <li>Resampling approaches for intervals in linear time-series models after selection (Physica A, 2023)</li>
+          <li>Knockoff procedures for FDR control in high-dimensional data streams (Journal of Applied Statistics, 2023)</li>
+          <li>Earlier work with T.L. Lai and collaborators on multivariate stochastic regression, adaptive enrichment designs, and multiple testing</li>
+        </ul>
+      </article>
+
+      <article class="detail-block" id="learning">
+        <h2 class="detail-block__title"><span class="detail-block__num">04</span>AI-powered personalized learning</h2>
+        <p><strong>Co-Principal Investigator</strong> · 2025–2027 · 1+1+1 Joint Collaboration Fund · RMB 255K · ongoing (2025A0505000070).</p>
+        <p>This collaboration sits next to the teaching appointment: can adaptive systems help students practice judgment — choosing models, reading uncertainty, noticing when a claim is too strong — rather than only accelerating content delivery?</p>
+      </article>
+
+      <article class="detail-block" id="other">
+        <h2 class="detail-block__title"><span class="detail-block__num">05</span>Other collaborations</h2>
+        <p>Co-PI on a completed industry collaboration with Guotai Junan Securities on machine-learning based intelligent routing research (2025).</p>
+        <p><a class="btn btn--ghost" href="publications.html">Browse selected publications →</a></p>
+      </article>
+    </div>
+
+    <aside class="detail-toc" aria-label="On this page">
+      <p class="detail-toc__label">On this page</p>
+      <ol>
+        <li><a href="#why">Why PSI</a></li>
+        <li><a href="#nsfc">NSFC PI</a></li>
+        <li><a href="#methods">Method threads</a></li>
+        <li><a href="#learning">Personalized learning</a></li>
+        <li><a href="#other">Other</a></li>
+      </ol>
+    </aside>
+  </div>
+</div>
+</main>
+<footer class="footer">
+  <div class="container footer__inner">
+    <p><a href="../index.html">← Back to index</a></p>
+  </div>
+</footer>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
+<script src="../vendor/SplitText.min.js"></script>
+<script src="../script.js"></script>
+<script src="../motion.js"></script>
+</body>
+</html>
