@@ -2,20 +2,20 @@
  * Local static + /api/ask server for the personal-site demo.
  * Uses process.env.CLOD_API_KEY (never hard-code the key).
  *
- *   node server.mjs
+ *   node scripts/local-server.mjs
  *   open http://127.0.0.1:4173
  */
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = __dirname;
+const ROOT = path.resolve(__dirname, '..');
 const PORT = Number(process.env.PORT || 4173);
-const askHandler = require('./api/ask.js');
+const askHandler = require('../api/ask.js');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
