@@ -5,8 +5,7 @@
   "outputDirectory": ".",
   "functions": {
     "api/ask.js": {
-      "maxDuration": 60,
-      "memory": 1024
+      "maxDuration": 60
     }
   },
   "rewrites": [
