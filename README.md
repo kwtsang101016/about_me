@@ -1,38 +1,24 @@
-# Personal site demo ‚Ä?Tsang Ka Wai
+# Personal site ? Tsang Ka Wai
 
-A polished personal webpage inspired by `../portfolio`, filled with content from `../Profile` (CV + photo).
+Live:
+- Site: https://about-me-tan-omega.vercel.app
+- Repo: https://github.com/kwtsang101016/about_me
 
-## Open
+## Why Vercel (not GitHub Pages)
 
-Open `index.html` in a browser (double-click or Live Preview).
+GitHub Pages only hosts static files. The **Ask** feature needs a serverless API (`/api/ask`) plus `CLOD_API_KEY`, so this project is deployed on **Vercel**.
 
-## What‚Äôs included
-
-- Hero, intro, trajectory (footprint + timeline), teaching deep dive with stats/tabs
-- Flip cards ‚Ü?`pages/teaching.html`, `pages/research.html`, `pages/publications.html`
-- Contact (email, ORCID, office)
-- Same visual/motion stack as the portfolio demo (GSAP + ScrollTrigger)
-
-## What‚Äôs intentionally lighter
-
-- No DeepSeek / Ask copilot (workshop demo focus; optional later)
-- No hobby flipbook
-- City photos are decorative placeholders from the original portfolio assets
-
-## Ask (CL≈çD, not DeepSeek)
-
-Uses your environment variable `CLOD_API_KEY` via OpenAI-compatible endpoint `https://api.clod.io/v1`.
+## Local preview
 
 ```bash
-# from personal-site/
+# optional Ask backend
+set CLOD_API_KEY=your_key
 node scripts/local-server.mjs
-# open http://127.0.0.1:4173/pages/ask.html
+# open http://127.0.0.1:4173
 ```
 
-Optional env:
-- `CLOD_MODEL` (default `GPT OSS 20B` ‚Ä?works on free-tier balance)
-- `CLOD_BASE_URL` (default `https://api.clod.io/v1`)
-- `PORT` (default `4173`)
+Or open `index.html` directly (Ask falls back to canned answers).
 
-Never commit the API key. For Vercel, set `CLOD_API_KEY` in Project ‚Ü?Environment Variables.
+## Vercel env
 
+In the Vercel project, set `CLOD_API_KEY` (Production / Preview). Optional: `CLOD_MODEL`, `CLOD_BASE_URL`.
