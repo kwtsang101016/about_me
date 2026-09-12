@@ -142,8 +142,22 @@ function sse(res, obj) {
 }
 
 async function handleQa(res, messages) {
-  const r = await callModel(messages, { stream: true, maxTokens: 900 });
-  if (!r.ok) return json(res, r.status || 503, { error: r.error, detail: r.detail });
+  // Non-stream is more reliable on Vercel + free-tier CLōD models than SSE upstream.
+  const r = await callModel(messages, { stream: false, maxTokens: 900 });
+  if (!r.ok) {
+    return json(res, r.status || 503, {
+      error: r.error || 'upstream_unavailable',
+      detail: r.detail || null,
+      upstreamStatus: r.upstreamStatus || null
+    });
+  }
+
+  const raw = r.data && r.data.choices && r.data.choices[0]
+    && r.data.choices[0].message && r.data.choices[0].message.content;
+  const full = typeof raw === 'string' ? raw.trim() : '';
+  if (!full) {
+    return json(res, 502, { error: 'empty_model_output' });
+  }
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
@@ -151,47 +165,19 @@ async function handleQa(res, messages) {
   res.setHeader('Connection', 'keep-alive');
   res.setHeader('X-Accel-Buffering', 'no');
 
-  let full = '';
-  let buf = '';
-  const reader = r.response.body.getReader();
-  const decoder = new TextDecoder();
+  // Keep the existing SSE client contract: one delta, then refs/done.
+  sse(res, { type: 'delta', text: full });
 
-  try {
-    for (;;) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += decoder.decode(value, { stream: true });
-
-      let idx;
-      while ((idx = buf.indexOf('\n')) >= 0) {
-        const line = buf.slice(0, idx).trim();
-        buf = buf.slice(idx + 1);
-        if (!line.startsWith('data:')) continue;
-        const payload = line.slice(5).trim();
-        if (payload === '[DONE]') continue;
-        let chunk;
-        try { chunk = JSON.parse(payload); } catch (e) { continue; }
-        const delta = chunk.choices && chunk.choices[0] && chunk.choices[0].delta;
-        const text = delta && delta.content;
-        if (text) { full += text; sse(res, { type: 'delta', text }); }
-      }
+  const refs = [];
+  const seen = new Set();
+  for (const m of full.matchAll(/\[\[ref:([\w-]+)\/([\w-]+)\]\]/g)) {
+    const key = m[1] + '/' + m[2];
+    if (VALID_REFS.has(key) && !seen.has(key)) {
+      seen.add(key);
+      refs.push({ page: m[1], anchor: m[2] });
     }
-
-    const refs = [];
-    const seen = new Set();
-    for (const m of full.matchAll(/\[\[ref:([\w-]+)\/([\w-]+)\]\]/g)) {
-      const key = m[1] + '/' + m[2];
-      if (VALID_REFS.has(key) && !seen.has(key)) {
-        seen.add(key);
-        refs.push({ page: m[1], anchor: m[2] });
-      }
-    }
-    sse(res, { type: 'refs', refs });
-    sse(res, { type: 'done' });
-  } catch (err) {
-    sse(res, { type: 'error', error: 'stream_interrupted' });
-  } finally {
-    if (r.cleanup) r.cleanup();
-    res.end();
   }
+  sse(res, { type: 'refs', refs });
+  sse(res, { type: 'done' });
+  res.end();
 }

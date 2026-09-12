@@ -114,7 +114,11 @@
     if (res.status === 404) { clearTimeout(timer); throw { kind: 'nomock' }; }
     if (!res.ok) {
       clearTimeout(timer);
-      throw { kind: res.status === 429 ? 'rate' : 'unavailable' };
+      var info = {};
+      try { info = await res.json(); } catch (e) {}
+      if (res.status === 429) throw { kind: 'rate', info: info };
+      if (info && info.error === 'missing_api_key') throw { kind: 'nokey', info: info };
+      throw { kind: 'unavailable', info: info };
     }
 
     var reader = res.body.getReader();
@@ -181,7 +185,8 @@
     rate: 'Too many questions in a short window. Give it a minute and try again.',
     timeout: 'The model didn\'t respond in time. The pages below have the same information.',
     network: 'Couldn\'t reach the answering service. The pages below have the same information.',
-    unavailable: 'The answering service is unavailable right now. The pages below have the same information.'
+    unavailable: 'The answering service is unavailable right now. The pages below have the same information.',
+    nokey: 'The Ask API key is not configured on the server. The pages below still have the same information.'
   };
 
   async function onSubmit(e) {
@@ -202,7 +207,12 @@
     } catch (err) {
       var kind = (err && err.kind) || 'unavailable';
       if (kind === 'nomock') runStatic(text);
-      else degrade(ERRORS[kind] || ERRORS.unavailable);
+      else {
+        var detail = err && err.info && (err.info.error || err.info.detail);
+        var msg = ERRORS[kind] || ERRORS.unavailable;
+        if (detail) msg = msg + ' (' + detail + ')';
+        degrade(msg);
+      }
     } finally {
       busy = false;
       setStatus('');

@@ -13,7 +13,7 @@ function model() {
   return process.env.CLOD_MODEL || 'GPT OSS 20B';
 }
 
-const TTFB_TIMEOUT_MS = 12000;
+const TTFB_TIMEOUT_MS = 25000;
 const TOTAL_TIMEOUT_MS = 60000;
 
 function mapError(status, err) {
