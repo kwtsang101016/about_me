@@ -74,6 +74,16 @@ function validate(body) {
 }
 
 module.exports = async function handler(req, res) {
+  if (req.method === 'GET') {
+    const key = process.env.CLOD_API_KEY || '';
+    return json(res, 200, {
+      ok: true,
+      hasKey: Boolean(key),
+      keyLen: key.length,
+      model: require('./_lib/provider.js').model(),
+      base: require('./_lib/provider.js').baseUrl()
+    });
+  }
   if (req.method === 'OPTIONS') {
     checkOrigin(req, res);
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
