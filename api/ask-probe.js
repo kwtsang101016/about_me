@@ -14,6 +14,8 @@ module.exports = async function handler(req, res) {
   }
 
   const key = process.env.CLOD_API_KEY || '';
+  const ds = process.env.DEEPSEEK_API_KEY || '';
+  const { callModel, model, baseUrl, pickProvider } = require('./_lib/provider.js');
   const probe = await callModel(
     [{ role: 'user', content: 'Reply with exactly: OK' }],
     { stream: false, maxTokens: 20 }
@@ -21,8 +23,11 @@ module.exports = async function handler(req, res) {
 
   res.statusCode = 200;
   res.end(JSON.stringify({
-    hasKey: Boolean(key),
-    keyLen: key.length,
+    provider: pickProvider(),
+    hasClodKey: Boolean(key),
+    clodKeyLen: key.length,
+    hasDeepseekKey: Boolean(ds),
+    deepseekKeyLen: ds.length,
     model: model(),
     base: baseUrl(),
     probeOk: Boolean(probe && probe.ok),

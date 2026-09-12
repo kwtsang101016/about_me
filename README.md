@@ -22,6 +22,11 @@ node scripts/local-server.mjs
 
 Or open `index.html` directly (Ask uses canned answers).
 
-## Vercel env
+## Vercel Ask (important)
 
-Set `CLOD_API_KEY` in the Vercel project (Production / Preview). Optional: `CLOD_MODEL`, `CLOD_BASE_URL`.
+CL?D works on your laptop, but **Vercel datacenter IPs are often blocked by Cloudflare** on `api.clod.io` (HTTP 403 ?Just a moment?? ? `upstream_auth`).
+
+For live Ask on Vercel, set **`DEEPSEEK_API_KEY`** in the Vercel project env (Production + Preview), then redeploy. Optional: `DEEPSEEK_MODEL` (default `deepseek-chat`).
+
+Local preview can keep using `CLOD_API_KEY`.
+
