@@ -7,6 +7,11 @@
     "email": "kwtsang@cuhk.edu.cn",
     "orcid": "https://orcid.org/0000-0002-9383-4455",
     "office": "Rm 505b, Daoyuan Building, CUHKSZ",
+    "appointment": {
+      "when": "Fridays 15:00-17:00",
+      "url": "https://apply.cuhk.edu.cn/matrix-base/rs/plan/SDSAB",
+      "note": "Students can book advising appointments via the SDS advising system"
+    },
     "focus": "Teaching-track faculty; currently exploring how AI can enhance teaching and learning in statistics",
     "interests": ["Statistics education", "AI for teaching and learning", "Time series", "High-dimensional regression", "Post-selection inference"],
     "refs": [{ "page": "home", "anchor": "hero" }]

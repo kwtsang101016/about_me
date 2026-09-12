@@ -9,7 +9,7 @@
 
 Repo: https://github.com/kwtsang101016/about_me
 
-Workshop tip: share the GitHub Pages link for the site; tell students to open VPN only if they want to try live Ask on Vercel.
+Workshop tip: share the GitHub Pages link for the site (Ask is hidden there). Live Ask is only on Vercel and may need VPN.
 
 ## Local preview
 
