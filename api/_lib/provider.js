@@ -19,7 +19,13 @@ const TOTAL_TIMEOUT_MS = 60000;
 function mapError(status, err) {
   if (err && err.name === 'AbortError') return { code: 'upstream_timeout', status: 504 };
   if (err) return { code: 'upstream_network', status: 503 };
-  if (status === 401 || status === 403) return { code: 'upstream_auth', status: 503 };
+  if (status === 401 || status === 403) {
+    return {
+      code: 'upstream_auth',
+      status: 503,
+      detail: 'CLōD rejected the API key (HTTP ' + status + ', keyLen=' + (process.env.CLOD_API_KEY || '').length + ')'
+    };
+  }
   if (status === 429) return { code: 'upstream_rate_limited', status: 503 };
   if (status >= 500) return { code: 'upstream_unavailable', status: 503 };
   if (status === 400 || status === 422) return { code: 'upstream_bad_request', status: 502 };
@@ -71,7 +77,7 @@ async function sendRequest(apiKey, messages, opts) {
     let detail = '';
     try { detail = await res.text(); } catch (_) { /* ignore */ }
     const m = mapError(res.status, null);
-    return { ok: false, error: m.code, status: m.status, upstreamStatus: res.status, detail: detail.slice(0, 300) };
+    return { ok: false, error: m.code, status: m.status, upstreamStatus: res.status, detail: (detail.slice(0, 200) || m.detail || null) };
   }
 
   if (stream) {

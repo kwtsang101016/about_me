@@ -75,6 +75,7 @@
   }
 
   function liveAskLink() {
+    if (/vercel\.app$/i.test(location.hostname || '')) return '';
     return '<p class="ask__jd-evidence"><a class="ask__ref" href="' +
       escapeHtml(LIVE_ASK_URL) + '" target="_blank" rel="noopener">Open live Ask on Vercel (VPN) ↗</a></p>';
   }
